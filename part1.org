@@ -1,0 +1,77 @@
+* Scala Basics
+** What is Scala?
+   Scala is a multi-paradigm programming language
+   designed to integrate features of object-oriented programming and
+   functional programming. The name Scala is a portmanteau of
+   "scalable" and "language", signifying that it is designed to grow
+   with the demands of its users. James Strachan, the creator of
+   Groovy, described Scala as a possible successor to Java.
+** Language Features
+  + Strongly Typed
+    + Statically typed
+    + Local type inference
+    + Parameterized types
+    + Type Aliases
+    + "Higher-kinded" Types (Intermediate)
+    + Specialized Generics (Intermediate)
+  + Common Types
+    + Primitives
+    + Arrays
+    + String
+    + Functions
+    + List
+    + Vector
+    + Map
+    + Set
+    + Stream
+    + Unit
+    + Tuples
+    + Option
+    + Either
+  + Object-Oriented
+    + Classes and Traits
+      + Abstract Members
+      + Abstract Types
+    + Mixins
+    + Ad-hoc instances
+    + Structural Types
+    + Linearized Types
+    + Anonymous Classes
+    + Self naming and type annotations
+    + First-class modules
+      + Classes are modules
+      + Singleton objects
+      + Package Objects
+      + Visibility control
+      + Path-dependent types (Intermediate)
+    + Companion Objects
+    + Algebraic Data Types (Simulated)
+      + Sealed traits
+      + Case Classes
+        + Copy function
+      + Case Objects
+  + Functional
+    + First-class functions (including closures, anonymous, and nested functions)
+    + Function "objects"
+    + Partial functions
+    + Parameter Groups
+    + Pass Arguments by Value/Reference and Pass by Name
+    + Variable-sized Argument Lists and "Splats"
+    + Difference between Methods and Functions
+  + Other
+    + Ability to distinguish read-only vs. read/write identifiers
+    + Lazy values
+    + If expressions
+    + While expressions
+    + Try/Catch
+    + For Comprehensions
+      + Monadic
+      + Imperative
+    + Type-driven Constraints
+      + Type bounds and View Types (Intermediate)
+      + Implicit Parameters (Intermediate)
+      + Context Bounds (Intermediate)
+    + Pattern Matching
+      + Assignment patterns
+      + Extractors (Intermediate)
+    + Code Annotations (Intermediate)

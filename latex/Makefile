@@ -21,4 +21,7 @@ $(DOTPDF)/%.pdf: $(DOTSRC)/%.dot force
 clean:
 	-rm -f *.pdf *.ps *.bbl *.log *.aux *.toc *.out *.blg *.snm *.nav *~ $(TEXSRC)/* $(DOTPDF)/*
 
+mostly-clean:
+	-rm -f *.ps *.bbl *.log *.aux *.toc *.out *.blg *.snm *.nav *~ $(TEXSRC)/* $(DOTPDF)/*
+
 .PHONY: force

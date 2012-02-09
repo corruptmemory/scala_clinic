@@ -105,7 +105,11 @@
     \item Many features to aid building large systems
     \item Good performance
     \item Probably the best language on the JVM
+    \item Robust and active community
     \item Getting better all the time
+    \begin{itemize}
+      \item Scala 2.10 to be released this quarter
+    \end{itemize} 
   \end{itemize}
 \end{frame}
 
@@ -135,8 +139,8 @@
     \item Download it (2.9.1 current) \tinyurl{http://scala-lang.org}
     \item Install SBT \tinyurl{https://github.com/harrah/xsbt}
     \item TextMate/Sublime Text/Vim/Emacs/JEdit
-    \item Intelli/J IDEA
-    \item Eclipse
+    \item Eclipse \tinyurl{http://scala-ide.org/index.html}
+    \item Intelli/J IDEA \tinyurl{http://confluence.jetbrains.net/display/SCA/Scala+Plugin+Nightly+Builds+for+Nika}
     \item Plays well with most JVM tools
   \end{itemize}
 \end{frame}
@@ -164,6 +168,7 @@
 
 \begin{frame}{Community}
   \begin{itemize}[<+->]
+    \item Scala Bug-tracker (JIRA) \tinyurl{https://issues.scala-lang.org/secure/Dashboard.jspa}
     \item Google Groups (there are a bunch)
     \item Scala Documentation Project \tinyurl{http://docs.scala-lang.org/}
     \item Scala Improvemet Process \tinyurl{http://docs.scala-lang.org/sips/index.html}
@@ -189,6 +194,16 @@
   \end{quote}
   \begin{flushright}
     \tiny{\textcolor{keyword}{-- Bryan O'Sullivan, \url{https://twitter.com/\#!/bos31337/status/155102828774428672}}}
+  \end{flushright}
+\end{frame}
+
+\begin{frame}{Frame of Mind}
+  \begin{quote}
+    The more interesting your types are, the less fun they are to
+    write down.
+  \end{quote}
+  \begin{flushright}
+    \tiny{\textcolor{keyword}{-- Benjamin Pierce}}
   \end{flushright}
 \end{frame}
 
@@ -438,6 +453,10 @@
 \featureframe{Other}
              {Pattern-matching}
              {\featureexample{Trick for matching multiple criteria}{matching7}}
+
+\featureframe{Other}
+             {Pattern-matching}
+             {\featureexample{Type Matching}{matching9}}
 
 \featureframe{Other}
              {Pattern-matching}

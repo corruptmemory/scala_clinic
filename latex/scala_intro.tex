@@ -36,6 +36,8 @@
   \colorbox{LightGrey}{\begin{varwidth}{\textwidth}{\slmss\begin{spacing}{0.5}\input{#1}\end{spacing}}\end{varwidth}}}
 \newcommand{\cexample}[1]{
   {\slmss\begin{spacing}{0.5}\input{texsrc/#1.scala.tex}\end{spacing}}}
+\newcommand{\tinyurl}[1]{
+  {\tiny{\textcolor{keyword}{\url{#1}}}}}
 \newcommand{\featureexample}[2]{
   {\small{Example: \emph{#1}}\vskip-4mm\hrulefill\vskip+3mm\cexample{#2}}}
 \newcommand{\featurecategory}[2]{
@@ -130,12 +132,43 @@
 \begin{frame}{Getting Started}
   \begin{itemize}[<+->]
     \item Get Java JDK 1.6 (1.7 if you want to experiment)
-    \item Download it (2.9.1 current)
-    \item Install SBT
+    \item Download it (2.9.1 current) \tinyurl{http://scala-lang.org}
+    \item Install SBT \tinyurl{https://github.com/harrah/xsbt}
     \item TextMate/Sublime Text/Vim/Emacs/JEdit
     \item Intelli/J IDEA
     \item Eclipse
     \item Plays well with most JVM tools
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{On-Line Learning Resources}
+  \begin{itemize}[<+->]
+    \item Scala Documentation Project \tinyurl{http://docs.scala-lang.org/}
+    \item Official Scala Web Site \tinyurl{http://scala-lang.org}
+    \item Scala-user Google Group \tinyurl{https://groups.google.com/forum/?fromgroups\#!forum/scala-user}
+    \item Stackoverflow \tinyurl{http://stackoverflow.com/tags/scala/info}
+    \item Scala Koans \tinyurl{https://bitbucket.org/dickwall/scala-koans}
+    \item Debasish Ghosh's Blog \tinyurl{http://debasishg.blogspot.com/}
+    \item Tony Morris' Blog \tinyurl{http://blog.tmorris.net/}
+    \item Jim McBeath's Blog \tinyurl{http://jim-mcbeath.blogspot.com/}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Books}
+  \begin{itemize}[<+->]
+    \item A pretty comprehensive list can be found here \tinyurl{http://www.scala-lang.org/node/959}
+    \item Martin Odersky's Book \tinyurl{http://www.artima.com/shop/programming_in_scala_2ed}
+    \item Josh Seureth's Book \tinyurl{http://www.manning.com/suereth/}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Community}
+  \begin{itemize}[<+->]
+    \item Google Groups (there are a bunch)
+    \item Scala Documentation Project \tinyurl{http://docs.scala-lang.org/}
+    \item Scala Improvemet Process \tinyurl{http://docs.scala-lang.org/sips/index.html}
+    \item IRC: \#scala on freenode
+    \item Meetups/Hackathons
   \end{itemize}
 \end{frame}
 

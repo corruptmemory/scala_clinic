@@ -1,0 +1,12 @@
+* Scala Standard Library
+** Collections
+*** Immutable
+*** Mutable
+*** Parallel
+** XML
+** Parsing
+** Actors
+** Concurrency
+** Process management
+** Swing
+** Testing

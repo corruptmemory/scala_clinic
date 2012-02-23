@@ -53,6 +53,8 @@
 
 \newcommand{\mincludelisting}[1]{
   {\mlmss\input{#1}}}
+\newcommand{\hilight}[1]{
+  {\textcolor{hilite}{\emph{#1}}}}
 \newcommand{\subtitleFont}[1]{{\footnotesize #1}}
 \newcommand{\slideheading}[1]{
   \begin{center}
@@ -78,304 +80,278 @@
 \begin{document}
 
 \title{\wackyFont{Scala Clinic}}
-\subtitle{\textbf{Scala Standard Libary}}
+\subtitle{\textbf{Intermediate Scala}}
 \author{Jim~Powers\\\subtitleFont{Patch.com}}
-\date{\subtitleFont{15 February 2012}}
+\date{\subtitleFont{23 February 2012}}
 
 \maketitle
 
-\section{Intro to the Scala Library}
+\section{Intermediate Scala}
 
-\begin{frame}{Intro to the Scala Library}
-\end{frame}
-
-\begin{frame}{Intro to the Scala Library}
-  What's covered by the Scala Library?
-\end{frame}
-
-\begin{frame}{Intro to the Scala Library}
-  What's covered by the Scala Library?
+\begin{frame}{Intermediate Scala}
   \begin{itemize}[<+->]
-    \item Collections
+    \item Implicits
     \begin{itemize}
-      \item Immutable
-      \item Mutable
-      \item Parallel
+      \item Implicit Conversions
+      \item Implicit Arguments
     \end{itemize}
-    \item XML
-    \item Parsing
-    \item Actors
-    \item Concurrency
-    \item Process management
-    \item Swing
-    \item Testing
+    \item Type Bounds
+    \item Views (collections)
+    \item View Bounds
+    \item Context Bounds
+    \item \hilight{Type Classes}
+    \item Manifests and Type Erasure
+    \item Higher-Kinded Types
   \end{itemize}
 \end{frame}
 
-\section{Collections}
-
-\begin{frame}{Collections}
-  \begin{itemize}[<+->]
-    \item Mutable
-    \item Immutable
-    \item Parallel
-  \end{itemize}
+\begin{frame}{Implicits}
+  \hilight{Implicits} are a way to tell the compiler of a way to prove (\emph{provide evidence}) that there is a way to get from \emph{here} (desired functionality) to \emph{there} (actual functionality) with the compiler actually \emph{connecting the dots} for you.
 \end{frame}
 
-\begin{frame}{Collections}
+\begin{frame}{Detour: \emph{Companion Objects}}
+  \hilight{Companion Objects} are objects that share the same name as a \emph{class} in the same compilation unit.  \emph{Companion Objects} can be used to house implicit definitions to be used whenever the associated class is in scope.
+\end{frame}
+
+\featureframe{Companion Objects}
+             {Companion objects can hold stuff for instances}
+             {\featureexample{}{companion}}
+
+\begin{frame}{Implicit Scope}
+  \hilight{Implicit Scope} is the \emph{search space} used by the compiler to resolve requests for \emph{implicit evidence}.
+\end{frame}
+
+\begin{frame}{Implicit Scope}
   \begin{itemize}[<+->]
-    \item Arrays
+    \item First look in current scope
     \begin{itemize}
-      \item Plain old Java Arrays
-      \item ``Pimped'' with \textcolor{hilite}{\emph{implicit conversions}}
+      \item Implicits defined in current scope (1)
+      \item Explicit imports (2)
+      \item wildcard imports (3)
+      \item Same scope in other files (4)
     \end{itemize}
-    \item Buffers
-    \item Lists
-    \item Stacks
-    \item Vectors
-    \item Sets (and BitSets)
-    \item Maps
-    \item Queues
-    \item Ranges
-    \item Streams
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Collections}
-  \begin{center}
-    \begin{tabular}{| l || c | c | c |}
-      \hline
-      Type & Immutable & Mutable & Parallel \\
-      \hline
-      Arrays & & \checkmark & \checkmark \\
-      Buffers & & \checkmark & \checkmark \\
-      Lists & \checkmark & \checkmark & \checkmark \\
-      Stacks & \checkmark & \checkmark & \checkmark \\
-      Vectors & \checkmark & \checkmark & \checkmark \\
-      Sets & \checkmark & \checkmark & \checkmark \\
-      BitSets & \checkmark & \checkmark & \checkmark \\
-      Maps & \checkmark & \checkmark & \checkmark \\
-      Queues & \checkmark & \checkmark & \checkmark \\
-      Ranges & \checkmark &  & \checkmark \\
-      Streams & \checkmark &  & \checkmark \\
-      \hline
-    \end{tabular}
-  \end{center}
-\end{frame}
-
-\begin{frame}{Collections: Immutable}
-  \begin{itemize}[<+->]
-    \item No direct modification
-    \item Operations return new objects
-      \begin{itemize}
-        \item Structural sharing
-        \item Easily shared in a concurrent environment
-        \begin{itemize}
-          \item \emph{No locks!}
-        \end{itemize}
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Collections: Immutable}
-  \begin{center}
-    Structural Sharing\\
-    \includegraphics[scale=.65]{images/clojure-trees.png}\\
-    \tiny{\textcolor{keyword}{\copyright 2008 Rich Hickey}}
-  \end{center}
-\end{frame}
-
-\begin{frame}{Collections: Parallel}
-  \begin{itemize}[<+->]
-    \item \textcolor{hilite}{\tt .par} $\rightarrow$ returns a parallel collection
-      \begin{itemize}
-        \item $O(1)$ conversion time!
-      \end{itemize}
-    \item A number of operations can be done concurrently
-    \item Uses Fork/Join
-    \item Example parallel functions
-      \begin{itemize}
-        \item {\tt map}
-        \item {\tt flatMap}
-        \item {\tt foreach}
-        \item {\tt filter}
-        \item {\tt reduce}
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Collections: Demo}
-  \begin{center}
-    Demo Collections
-  \end{center}
-\end{frame}
-
-\featureframe{XML}
-             {XML Literals!}
-             {\featureexample{XML in your code}{xml_literal}}
-
-\featureframe{XML}
-             {XML Literals!}
-             {\featureexample{XML producing functions}{xml_literal1}}
-
-\featureframe{XML}
-             {XML Literals!}
-             {\featureexample{XML element splicing}{xml_literal2}}
-
-\featureframe{XML}
-             {XML Literals!}
-             {\featureexample{Generalized XML splicing}{xml_literal3}}
-
-\featureframe{XML}
-             {XML Literals!}
-             {\featureexample{Pattern Matching}{xml_literal4}}
-
-\begin{frame}{XML}
-  \begin{itemize}[<+->]
-    \item XML support generally quite good, but has a fair number of
-      warts
-    \item EPFL/TypeSafe actively looking to overhaul XML support in
-      the language and standard libraries at some point.
-      \begin{itemize}
-        \item Perhaps with the forthcoming quasi-quoting and macro systems.
-      \end{itemize}
-    \item Of course there's other library stuff like functions for
-      manipulating/querying XML documents.
-    \item Of course you can use any other Java or Scala library to
-      working with XML (Anti-XML is \emph{very} good
-      \tinyurl{http://anti-xml.org/}), but they will not
-      \emph{natively} work with the Scala XML types.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Parsing}
-  \begin{itemize}[<+->]
-    \item Scala library provides a rich \emph{parser combinator
-      library}
-    \item Can define parsers directly in Scala without using external
-      tools like \emph{Antlr} \tinyurl{http://www.antlr.org/}
-  \end{itemize}
-\end{frame}
-
-\featureframe{Parsing}
-             {Parsing Combinators}
-             {\featureexample{Simple parser}{parser}}
-
-\begin{frame}{Parsing: Demo}
-  \begin{center}
-    Demo Parsing Combinators
-  \end{center}
-\end{frame}
-
-\begin{frame}{Actors}
-  \begin{itemize}[<+->]
-    \item Actors are a model concurrency based on sending messages
-      between logical ``processes''.
-    \item Actors are not synonymous with \emph{threads}.  Because of this Actors are lighter-weight than threads and are often managed with a variety of execution strategies.
-    \item Scala comes with a respectable Actor library
-      \begin{itemize}
-        \item Does support local and remote actors
-        \item \textcolor{hilite}{Akka} provides a much more robust
-          actor implementation.
-        \item \textcolor{hilite}{Scalaz} also has a nice (local only)
-          actor implementation that is also type-safe.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\featureframe{Actors}
-             {Ping-Pong}
-             {\featureexample{Messages}{actor_messages}}
-
-\featureframe{Actors}
-             {Ping-Pong}
-             {\featureexample{Ponger}{ponger}}
-
-\featureframe{Actors}
-             {Ping-Pong}
-             {\featureexample{Pinger}{pinger}}
-
-\featureframe{Actors}
-             {Ping-Pong}
-             {\featureexample{Runner}{runner}}
-
-\begin{frame}{Actors: Demo}
-  \begin{center}
-    Demo Actors
-  \end{center}
-\end{frame}
-
-\begin{frame}{Concurrency}
-  \begin{itemize}[<+->]
-    \item There are a lot of nifty low-level concurrency primitives in the standard Scala library
+    \item Parts of the type of implicit value being looked up and their companion objects
     \begin{itemize}
-      \item Fair to say that many of them will be replaced by higher-performing versions coming from Akka
+      \item Companion objects of the type
+      \item Companion objects of type arguments of types
+      \item Outer objects for nested types
+      \item Other dimensions
     \end{itemize}
-    \item The most ubiquitous concurrency mechanism in Scala is the \textcolor{hilite}{\emph{Future}}
   \end{itemize}
-\end{frame}
-
-\begin{frame}{Concurrency: Futures}
-  \begin{itemize}[<+->]
-    \item A \textcolor{hilite}{\emph{Future}} represents an asynchronous computation that will eventually yield a value
-    \item \textcolor{hilite}{\emph{Futures}} can have a variety of execution strategies
-  \end{itemize}
-\end{frame}
-
-\featureframe{Futures}
-             {Delayed Execution}
-             {\featureexample{Bad way}{futures}}
-
-\featureframe{Futures}
-             {Monadic composition}
-             {\featureexample{Good way}{futures_good}}
-
-\begin{frame}{Futures: Demo}
   \begin{center}
-    Demo Futures
+    \tiny{\textcolor{keyword}{Taken from Josh Suereth's NE Scala Symposium presentation:\\}}\tinyurl{https://docs.google.com/present/view?id=dfqn4jb_106hq4mvbd8}
   \end{center}
 \end{frame}
 
-\begin{frame}{Process Management}
+\begin{frame}{Implicit Conversions}
+  \hilight{Implicit Conversions} provide a way to make \emph{ad-hoc} conversions between values of some type.  There are two primary use-cases for \emph{implicit conversions}:
+\end{frame}
+
+\begin{frame}{Implicit Conversions}
+  \hilight{Implicit Conversions} provide a way to make \emph{ad-hoc} conversions between values of some type.  There are two primary use-cases for \emph{implicit conversions}:
   \begin{itemize}[<+->]
-    \item Stole all the goodies from \textcolor{hilite}{SBT}
+    \item To ``pimp'' or extend existing types with new functionality
+    \begin{itemize}
+      \item One of the ways to ``lift'' values into a \emph{DSL}
+    \end{itemize}
+    \item To remove conversion boilerplate when a value one type can unambiguously be used \emph{as} value of another type.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Process Management: Demo}
+\featureframe{Implicits}
+             {``Pimping''}
+             {\featureexample{}{pimped}}
+
+\featureframe{Implicits}
+             {Converting}
+             {\featureexample{}{conversion}}
+
+\begin{frame}{Implicit Arguments}
+  \hilight{Implicit Arguments} enable the compiler to supply arguments based on type alone (although you can supply your own arguments as well).  The feature effectively allows the compiler to infer \emph{proofs}.  The implicit argument mechanism enables the \hilight{typeclass pattern}.
+\end{frame}
+
+\featureframe{Implicits}
+             {Implicit Arguments}
+             {\featureexample{}{implicit_arguments}}
+
+\begin{frame}{Type Bounds}
+  \hilight{Type Bounds} provide a way to constrain the types supplied as type parameters.
+\end{frame}
+
+\begin{frame}{Detour: Variance}
+  \hilight{Variance} describes the acceptable \emph{variations} of a type parameter when relating two values.  The options are:
+\end{frame}
+
+\begin{frame}{Detour: Variance}
+  \hilight{Variance} describes the acceptable \emph{variations} of a type parameter when relating two values.  The options are:
+  \begin{itemize}[<+->]
+    \item \hilight{Invariant} - type parameters must match \emph{exactly}
+    \item \hilight{Covariant} - acceptable values can be of the same type or a \emph{subtype}
+    \item \hilight{Contravariant} - acceptable values can be of the same type or a \emph{supertype}
+  \end{itemize}
+\end{frame}
+
+\featureframe{Detour: Varaince}
+             {Invariance}
+             {\featureexample{}{invaraince_example}}
+
+\featureframe{Detour: Variance}
+             {Covaraince}
+             {\featureexample{}{covariance_example}}
+
+\featureframe{Detour: Variance}
+             {Contravaraince}
+             {\featureexample{}{contravaraince_example}}
+
+\begin{frame}{Type Bounds}
+  \hilight{Type Bounds} are just ways to further constrain \emph{variance}!
+\end{frame}
+
+\featureframe{Type Bounds}
+             {Upper Bound}
+             {\featureexample{}{upper_bound}}
+
+\featureframe{Type Bounds}
+             {Lower Bound}
+             {\featureexample{}{lower_bound}}
+
+\featureframe{Type Bounds}
+             {Upper and Lower Bound}
+             {\featureexample{}{upper_and_lower_bound}}
+
+\begin{frame}{Views (collections)}
+  \hilight{Views on collections} is a way to \emph{fuse} transformer operations such as {\tt map, flatMap, filter, etc.} into a single operation and apply that operation once to a collection avoiding the creation of intermediate collections.  Intelligent use of collection views can significantly improve performance while not losing the expressiveness of Scala's collections library.
+\end{frame}
+
+\featureframe{Views (collections)}
+             {Bad pattern}
+             {\featureexample{}{no_view}}
+
+\featureframe{Views (collections)}
+             {Better pattern}
+             {\featureexample{}{view}}
+
+\begin{frame}{View Bounds (or just plain Views)}
+  \hilight{View Bounds} are a way to express to the compiler a requirement that a type $T$ be treated as a type $S$ in some scope.  This requirement can be fulfilled by the compiler if an \emph{implicit conversion} can be found.  The type of the implicit conversion has to be $T \Rightarrow S$.
+\end{frame}
+
+\featureframe{View Bounds}
+             {Sugared}
+             {\featureexample{}{sugared}}
+
+\featureframe{View Bounds}
+             {De-sugared}
+             {\featureexample{}{de-sugared}}
+
+\begin{frame}{Context Bounds}
+  \hilight{Context Bounds} is a way to tell the compiler to look for a \emph{correspondence} to a given type in implicit scope and make that correspondence implicit in a newly introduced scope.
+\end{frame}
+
+\begin{frame}{Context Bounds: More technical explanation}
+  \hilight{Context Bounds} defines a constraint on a type $T$ that says that a corresponding value of type {\tt C[$T$]} must be visible in implicit scope to successfully type-check.  If such a correspondence exists then introduce the corresponding value of type {\tt C[$T$]} into a newly defined scope.
+\end{frame}
+
+\featureframe{Context Bounds}
+             {Sugared}
+             {\featureexample{}{cb_sugared}}
+
+\featureframe{Context Bounds}
+             {De-sugared}
+             {\featureexample{}{cb_de-sugared}}
+
+\featureframe{Context Bounds}
+             {Defining ``Zeros''}
+             {\featureexample{}{cb_zeros}}
+
+\begin{frame}{Type Classes}
+  The term \hilight{Type Classes} comes from research into \emph{typed lambda calculus} and has been made popular by the programming language \emph{Haskell}.  Even though the word ``classes'' appears in the term, it has \emph{nothing, whatsoever, to do with OO or Scala classes}. \hilight{Type Classes} are a way to address the need for \emph{ad-hoc polymorphism} in a language.
+\end{frame}
+
+\begin{frame}{Type Classes}
+  \hilight{Type Classes} are a considerably more powerful way to construct software systems than by using structural inheritance.
+\end{frame}
+
+\featureframe{Type Classes}
+             {Appending stuff}
+             {\featureexample{Lots of duplication}{bad_append}}
+
+\begin{frame}{Type Classes}
+  But I just want a generic append function!  After some research you discover the notion of a \hilight{semigroup}.
+\end{frame}
+
+\featureframe{Type Classes}
+             {Semigroup}
+             {\featureexample{}{semigroup}}
+
+\begin{frame}{Type Classes}
+  \hilight{Semigroups} are close to what we want, but we need to get $T$ into $M[T]$ in some generic fashion.  More research turns up the \hilight{monoid}.
+\end{frame}
+
+\featureframe{Type Classes}
+             {Monoid}
+             {\featureexample{}{monoid}}
+
+\featureframe{Type Classes}
+             {Monoid Typeclass}
+             {\featureexample{}{monoid_typeclass}}
+
+\featureframe{Type Classes}
+             {Generalized Monoids}
+             {\featureexample{}{generalized_monoids}}
+
+\featureframe{Type Classes}
+             {Generalized Monoids}
+             {\featureexample{Choose your monoid}{choose_monoids}}
+
+\begin{frame}{Manifests and Type Erasure}
+  Sadly, not all type information available at compile time is not available at run time.  In particular, type parameter information is lost at run time.
+\end{frame}
+
+\featureframe{Manifests and Type Erasure}
+             {Type information lost}
+             {\featureexample{}{erasure}}
+
+\featureframe{Manifests and Type Erasure}
+             {Recovering type information}
+             {\featureexample{}{manifests}}
+
+\begin{frame}{Higher-Kinded Types}
+  \hilight{Types} classify values, \hilight{kinds} classify types.
+\end{frame}
+
+\begin{frame}{Higher-Kinded Types}
   \begin{center}
-    Demo Process Management
+    Kind: $*$
   \end{center}
-\end{frame}
-
-\featureframe{Process Management}
-             {Shell interaction}
-             {\featureexample{}{process_management}}
-
-\begin{frame}{Swing}
+  \vskip-4mm\hrulefill\vskip+3mm
   \begin{itemize}[<+->]
-    \item Swing is a desktop UI framework from Java
-    \item Provides nice wrappers for this library
+    \item Int, Byte, String, ...
+    \item Classes with no type parameters
+    \item List[Int], Stream[String], ...
+    \item Types with parameters where all parameters are filled in
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Testing}
-  \begin{itemize}[<+->]
-    \item Bare minimum testing system (much more to come)
-    \item Bare minimum benchmarking tool
-    \item Several very robust Scala-oriented testing frameworks
-    \item Can also use Java testing frameworks
-  \end{itemize}
-\end{frame}
-
-\featureframe{Testing}
-             {Simple test}
-             {\featureexample{}{testing}}
-
-\begin{frame}{Testing: Demo}
+\begin{frame}{Higher-Kinded Types}
   \begin{center}
-    Demo Testing
+    Kind: $* \to *$
   \end{center}
+  \vskip-4mm\hrulefill\vskip+3mm
+  \begin{itemize}[<+->]
+    \item List,Stream,Vector,set
+    \item Any type with a single type-parameter argument
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Higher-Kinded Types}
+  \begin{center}
+    Kind: $* \to * \to *$
+  \end{center}
+  \vskip-4mm\hrulefill\vskip+3mm
+  \begin{itemize}[<+->]
+    \item Function1, Map, PartialFunction
+    \item Any type with a two type-parameters
+  \end{itemize}
 \end{frame}
 
 \end{document}
